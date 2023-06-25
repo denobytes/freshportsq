@@ -19,11 +19,10 @@ example:
 
 ```
 deno run --allow-net 'https://deno.land/x/freshportsq/cli.ts' deno
-   Packages Found   
---------------------
-speech-denoiser-lv2
-denominator
-deno
+Name                Version    
+speech-denoiser-lv2 g20181007_1
+denominator         4.7.1      
+deno                1.34.3_1 
 ```
 
 ## install
