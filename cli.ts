@@ -1,4 +1,5 @@
 import { parse as argparse } from "https://deno.land/std@0.181.0/flags/mod.ts";
+import { Table } from "https://deno.land/x/cliffy@v0.25.7/table/mod.ts";
 import {
   DOMParser,
   Element,
@@ -62,11 +63,18 @@ const doc = new DOMParser().parseFromString(resText, "text/html")!;
 let qEntries = await doc.querySelectorAll("dt");
 
 // process
-console.log("   Packages Found   ");
-console.log("--------------------");
+let pkgversion;
+let pkgtable: Table = new Table()
+  .header(["Name", "Version"]);
 for (const qq of qEntries) {
+  if (qq.innerHTML.includes("/#history")) {
+    let aref = await qq.querySelector("a");
+    pkgversion = aref.textContent;
+  }
   if (qq.textContent.includes("PKGNAME:")) {
     let pkgname = qq.textContent.replace(/PKGNAME: /, "");
-    console.log(pkgname);
+    pkgtable.push([`${pkgname}`, `${pkgversion}`]);
   }
 }
+// output
+pkgtable.render();
