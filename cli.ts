@@ -43,7 +43,7 @@ let qParams =
   "&search=go&num=10&stype=name&method=match&deleted=excludedeleted&start=1&casesensitivity=caseinsensitive";
 
 // setup query
-let searchTerm = Deno.args[0];
+let searchTerm = args._[0];
 let searchQuery = `${baseUrl}?query=${searchTerm}${qParams}`;
 
 if (debugMode) {
